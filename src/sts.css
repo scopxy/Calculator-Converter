@@ -12,7 +12,7 @@ body {
 .Calculator {
     display: grid;
     margin-top: 10%;
-    margin-left: 40%;
+    margin-left: 20%;
     float: left;
     max-width: fit-content;
     grid-template-columns: repeat(4,100px);
@@ -111,7 +111,6 @@ body {
 .ops:hover:after {
 	width: 100%;
 }
-
 
 .cnv {
     position: relative;
@@ -243,8 +242,6 @@ body {
     background: #ff7474;
 }
 
-
-
 @keyframes ripple-effect {
 0% {
     transform: scale(1);
@@ -277,7 +274,6 @@ body {
     background-color: #f5f5fa;
     box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
     overflow: hidden;
-    /*animation: showup 2s;*/
 }
 
 .Converter {
@@ -324,9 +320,66 @@ select {
     opacity: 0.7;
 }
 
-@keyframes showup {
-    0% {opacity:0;}
-    25% {opacity:0.25;}
-    75% {opacity:0.75;}
-    100% {opacity:1;}
+/*  DEL */
+
+#noselect {
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+          -webkit-tap-highlight-color: transparent;
+}
+
+.btns:nth-child(4) {
+    display: flex;
+	align-items: center;
+}
+
+.btns:nth-child(4), .btns:nth-child(4) span {
+    transition: 200ms;
+}
+
+.btns:nth-child(4) .del {
+    transform: translateX(35px);
+}
+
+.btns:nth-child(4) .icon {
+	position: absolute;
+	border-left: 1px solid #c41b1b;
+	transform: translateX(110px);
+	display: flex;
+    height: 10px;
+	
+	align-items: center;
+	justify-content: center;
+}
+
+.btns:nth-child(4) svg {
+    width: 15px;
+	fill: red;
+}
+
+.btns:nth-child(4):hover .text {
+	color: transparent;
+}
+
+.btns:nth-child(4):hover .icon {
+    width: 43.5px;
+	border-left: none;
+	transform: translateX(0);
+}
+
+.btns:nth-child(4):focus {
+	outline: none;
+}
+
+.btns:nth-child(4):hover {
+    background: #fef6f6;
+    color: red;
+}
+
+.btns:nth-child(4) .ripple {
+    background: #ff7474;
 }

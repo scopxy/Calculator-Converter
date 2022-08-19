@@ -194,9 +194,9 @@ function Calculator() {
 
   const[isVisible, setIsVisible] = useState(false);
   const transition = useTransition(isVisible, {
-    from: {x:-300, y: 800, opacity: 0},
+    from: {x: 100, y: 200, opacity: 0},
     enter: {x:0, y: 0, opacity: 1},
-    leave: {x:400, y: 800, opacity: 0},
+    leave: {x:400, y: 0, opacity: 0},
   });
 
 
@@ -212,7 +212,9 @@ function Calculator() {
           
           <RB className='btns' onClick={() => updateCalc('%')}><span>%</span></RB>
           <RB className='btns' id='ac' onClick={deleteAll}><span>AC</span></RB>
-          <RB className='btns' onClick={deleteLast}><span>DEL</span></RB>
+
+          <RB className='btns' id="noselect" onClick={deleteLast}><span className='del' >DEL</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg></span></RB>
+
 
           <RB className='btns' onClick={() => updateCalc('-')}><span>-</span></RB>
           <RB className='btns' onClick={() => updateCalc('7')}><span>7</span></RB>

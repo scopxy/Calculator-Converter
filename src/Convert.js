@@ -15,7 +15,7 @@ function Convert(props) {
   const [currency2, setCurrency2] = useState('USD');
   const [rates, setRates] = useState([]);
 
-  /*useEffect(() => {
+  useEffect(() => {
     axios.get("https://api.apilayer.com/fixer/latest?base=EUR&apikey=JELZiB6hoVpE6dyjT5V2SQbH8LmqOWeT")
       .then(response => {
         setRates(response.data.rates);
@@ -29,7 +29,7 @@ function Convert(props) {
       }
       init();
     }
-  }, [rates]);*/
+  }, [rates]);
 
 
 
