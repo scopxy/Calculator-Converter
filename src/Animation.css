@@ -1,0 +1,27 @@
+html {
+    background-color: #c72c41;
+}
+
+.app {
+    text-align: center;
+    padding: 40px;
+}
+
+button {
+    padding: 8px;
+}
+
+.container {
+    padding: 40px;
+    margin-top: 200px;
+    min-height: 200px;
+}
+
+.item {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+}

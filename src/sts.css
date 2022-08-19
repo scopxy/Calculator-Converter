@@ -1,0 +1,332 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: "Cascadia Code",Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;
+}
+
+body {
+    margin: 0;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+}
+
+.Calculator {
+    display: grid;
+    margin-top: 10%;
+    margin-left: 40%;
+    float: left;
+    max-width: fit-content;
+    grid-template-columns: repeat(4,100px);
+    grid-template-rows: minmax(100px, auto) repeat(6, 75px);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+
+.Calculator > button {
+    cursor: pointer;
+    font-size: 1.5rem;
+    border: 1px solid white;
+    outline: none;
+    background-color: rgba(255, 255, 255, .75);
+    border: 0;
+
+}
+
+.cnv {
+    grid-column: span 4;
+}
+
+.output {
+    grid-column: 1 / -1;
+    background-color: lightgrey;
+    display: flex;
+    min-height: 104px;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: .75rem;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.previous-operand {
+    color: rgba(0, 0, 0, .5);
+    font-size: 1.25rem;
+}
+  
+.current-operand {
+    color: black;
+    font-size: 2.5rem;
+}
+
+.ops {
+    background-color: #ddeaff;
+    position: relative;
+    /*border-radius: 4px;*/	
+    color: black;
+    transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);
+    
+}
+
+.ops:before, .ops:after {
+	content: '';
+	position: absolute;	
+	transition: inherit;
+	z-index: -1;
+}
+
+.ops:hover {
+	color: black;
+	transition-delay: .5s;
+}
+
+.ops:hover:before {
+	transition-delay: 0s;
+}
+
+.ops:hover:after {
+	background: rgb(173, 228, 211);
+	transition-delay: .35s;
+}
+
+.ops:before, 
+.ops:after {
+	top: 0;
+	width: 0;
+	height: 100%;
+}
+
+.ops:before {
+	right: 0;
+	border: 1px solid black;
+	border-left: 0;
+	border-right: 0;	
+}
+
+.ops:after {
+	left: 0;
+}
+
+.ops:hover:before,
+.ops:hover:after {
+	width: 100%;
+}
+
+
+.cnv {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #18181a;
+    color: #18181a;
+    display: inline-block;
+    font-size: 15px;
+    line-height: 15px;
+    padding: 18px 18px 17px;
+    text-decoration: none;
+    cursor: pointer;
+    background: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.cnv span {
+    color: black;
+}
+
+.cnv span:first-child {
+    position: relative;
+    transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
+    z-index: 10;
+}
+
+.cnv span:last-child {
+    color: white;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
+    z-index: 100;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    transform: translateY(225%) translateX(-50%);
+    height: 14px;
+    line-height: 13px;
+}
+
+.cnv:after {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transform-origin: bottom center;
+    transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+    transform: skewY(9.3deg) scaleY(0);
+    z-index: 50;
+}
+
+.cnv:hover:after {
+    transform-origin: bottom center;
+    transform: skewY(9.3deg) scaleY(2);
+}
+
+.cnv:hover span:last-child {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 1;
+    transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
+}
+
+
+.btns {
+    border: 0;
+    align-items: center;
+    appearance: none;
+    border-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    justify-content: center;
+    /*border-radius: 4px;*/
+    color: black;
+    overflow: hidden;
+    line-height: normal;
+    max-width: 100%;
+    padding: 2px 24px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform,opacity;
+    z-index: 0;
+}
+
+.btns:hover {
+  background: #F6F9FE;
+  color: #174ea6;
+}
+
+.btns:active {
+  outline: none;
+}
+
+.btns:focus {
+  outline: none;
+  border: 2px solid #F6F9FE;
+}
+
+.btns .ripple {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background: #74aeff;
+    display: block;
+    content: "";
+    border-radius: 9999px;
+    opacity: 1;
+    animation: 0.9s ease 1 forwards ripple-effect;
+}
+
+.btns:nth-child(3):hover {
+    background: #fef6f6;
+    color: red;
+}
+
+.btns:nth-child(3) .ripple {
+    background: #ff7474;
+}
+
+
+
+@keyframes ripple-effect {
+0% {
+    transform: scale(1);
+    opacity: 1;
+}
+50% {
+    transform: scale(10);
+    opacity: 0.375;
+}
+100% {
+    transform: scale(35);
+    opacity: 0;
+}
+}
+
+.btns> .content {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Convert */
+.container {
+    float:right;
+    margin-top: 300px;
+    margin-right: 250px;
+    width: 500px;
+    height: 300px;
+    border-radius: 20px;
+    background-color: #f5f5fa;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    overflow: hidden;
+    /*animation: showup 2s;*/
+}
+
+.Converter {
+    text-align: center; 
+    height: 300px;
+    padding: 16px;
+    position: relative;
+    text-align: center;
+}
+
+.vals {
+    columns: 2;
+    text-align: center;
+    position: absolute;
+    bottom: 75px;
+    right: 0;  
+    left: 0;
+}
+
+.group {
+    justify-content: center;
+}
+
+input {
+    margin: 2em auto;
+    width: 100px;
+    overflow: hidden;
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    margin: 10px;
+    opacity: 0.5;
+    font-size: 2.5ch;
+}
+
+input:focus {
+    outline: none;
+	color: #74aeff;
+}
+
+select {
+    border-radius: 50px;
+    border: 0;
+    opacity: 0.7;
+}
+
+@keyframes showup {
+    0% {opacity:0;}
+    25% {opacity:0.25;}
+    75% {opacity:0.75;}
+    100% {opacity:1;}
+}
